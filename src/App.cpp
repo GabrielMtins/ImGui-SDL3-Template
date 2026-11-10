@@ -39,7 +39,7 @@ std::unique_ptr<App> App::create(const char *title) {
 	ImGui::StyleColorsDark();
 	style.FrameRounding = 3.0f;
 	style.GrabRounding = 3.0f;
-    style.FontSizeBase = 16.0f;
+    style.FontSizeBase = 18.0f;
 
 	style.ScaleAllSizes(main_scale);
 	style.FontScaleDpi = main_scale;
@@ -72,7 +72,6 @@ void App::processEvents(void) {
 	while(SDL_PollEvent(&event)) {
 		ImGui_ImplSDL3_ProcessEvent(&event);
 		if(event.type == SDL_EVENT_QUIT) quit = true;
-
 	}
 }
 

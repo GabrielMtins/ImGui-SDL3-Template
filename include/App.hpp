@@ -20,7 +20,7 @@ class App {
 
 		void processEvents(void);
 		void loop(void);
-		void step(void);
+		virtual void step(void);
 };
 
 #endif
