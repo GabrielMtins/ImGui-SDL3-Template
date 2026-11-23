@@ -11,6 +11,7 @@ class App {
 		~App(void);
 
 		void run(void);
+		bool loop(void); /* returns false if the loop stops. */
 
 	private:
 		SDL_Window *window = NULL;
@@ -19,8 +20,9 @@ class App {
 		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 		void processEvents(void);
-		void loop(void);
-		virtual void step(void);
+
+		void init(void);
+		void step(void);
 };
 
 #endif

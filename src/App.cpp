@@ -37,8 +37,10 @@ std::unique_ptr<App> App::create(const char *title) {
 
 	ImGuiStyle& style = ImGui::GetStyle();
 	ImGui::StyleColorsDark();
+	/*
 	style.FrameRounding = 3.0f;
 	style.GrabRounding = 3.0f;
+	*/
     style.FontSizeBase = 18.0f;
 
 	style.ScaleAllSizes(main_scale);
@@ -46,6 +48,8 @@ std::unique_ptr<App> App::create(const char *title) {
 
 	ImGui_ImplSDL3_InitForSDLRenderer(app->window, app->renderer);
 	ImGui_ImplSDLRenderer3_Init(app->renderer);
+
+	app->init();
 
 	return app;
 }
@@ -66,16 +70,7 @@ void App::run(void) {
 	}
 }
 
-void App::processEvents(void) {
-	SDL_Event event;
-
-	while(SDL_PollEvent(&event)) {
-		ImGui_ImplSDL3_ProcessEvent(&event);
-		if(event.type == SDL_EVENT_QUIT) quit = true;
-	}
-}
-
-void App::loop(void) {
+bool App::loop(void) {
 	processEvents();
 
 	ImGui_ImplSDLRenderer3_NewFrame();
@@ -91,9 +86,23 @@ void App::loop(void) {
 	SDL_RenderClear(renderer);
 	ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), renderer);
 	SDL_RenderPresent(renderer);
+
+	return !quit;
+}
+
+void App::processEvents(void) {
+	SDL_Event event;
+
+	while(SDL_PollEvent(&event)) {
+		ImGui_ImplSDL3_ProcessEvent(&event);
+		if(event.type == SDL_EVENT_QUIT) quit = true;
+	}
 }
 
 /* Insert your code here. */
+void App::init(void) {
+}
+
 void App::step(void) {
 	ImGui::ShowDemoWindow();
 }
